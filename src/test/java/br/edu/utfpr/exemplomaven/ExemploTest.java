@@ -1,6 +1,7 @@
 package br.edu.utfpr.exemplomaven;
 
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -26,27 +27,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class ExemploTest {
 
-    /**
-     * Vc precisa identificar onde estah o chromedriver. Baixar de:
-     * https://sites.google.com/a/chromium.org/chromedriver/downloads
-     *
-     * Versão utilizada do chromedriver: 2.35.528139
-     */
-    private static String CHROMEDRIVER_LOCATION = "/home/utfpr/install/selenium/chromedriver";
-    
     private static int scId = 0;
 
     WebDriver driver;
     
     @BeforeClass
     public static void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_LOCATION);
+        WebDriverManager.chromedriver().setup();
     }
     
     @Before
     public void before() {
         ChromeOptions chromeOptions = new ChromeOptions();
-        //Opcao headless para MacOS e Linux
         chromeOptions.addArguments("headless");
         chromeOptions.addArguments("window-size=1200x600");
         chromeOptions.addArguments("start-maximized");
